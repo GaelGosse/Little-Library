@@ -9,19 +9,19 @@ module.exports = class library{
                 return time
             }
         } else {
-            console.error(`${time} is not a number`)
+            return console.error(`${time} is not a number`), false
         }
     }
-    now(){
+    now(separator=":"){
         let d = new Date()
-        return `${(this).zero(d.getHours())}:${(this).zero(d.getMinutes())}:${(this).zero(d.getSeconds())}`
+        return `${(this).zero(d.getHours())}${separator}${(this).zero(d.getMinutes())}${separator}${(this).zero(d.getSeconds())}`
     }
     caseSense(word){
         // strict sensitive case
         if(typeof(word) === 'string'){
             return word.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '.').trim();
         } else {
-            console.error(`${word} is not a string, please check the datatype of the arg`);
+            return console.error(`${word} is not a string, please check the datatype of the arg`), false;
         }
     }
     generateRandomPassword(size=16, min=true, maj=true, nbr=true, strong=false){
@@ -55,7 +55,7 @@ module.exports = class library{
                 result += characters.charAt(Math.floor(Math.random() * charactersLength));
             return result;
         } else {
-            console.error(`${size} must be a positive integer and not equal to zero`);
+            return console.error(`${size} must be a positive integer and not equal to zero`), false;
         }
     }
     rounded(nbr, decimal=0){
@@ -65,10 +65,10 @@ module.exports = class library{
                 let part = 10**decimal;
                 return Math.floor(nbr * part)/part;
             } else {
-                console.error(`${decimal} must be a positive integer`);
+                return console.error(`${decimal} must be a positive integer`), false;
             }
         } else {
-            console.error(`${nbr} is not a number, please check the datatype of the arg`);
+            return console.error(`${nbr} is not a number, please check the datatype of the arg`), false;
         }
     }
     removeDuplicates(arr){
@@ -101,7 +101,7 @@ module.exports = class library{
             return tab
         }
         else{
-            return console.warn("the input of this function is not an array, please check the datatype of it"), undefined
+            return console.warn("the input of this function is not an array, please check the datatype of it"), false
         }
     }
     getAllIndexes(arr, val) {
@@ -113,7 +113,7 @@ module.exports = class library{
             }
             return indexes;
         } else {
-            console.error('the first argument must be ')
+            return console.error('the first argument must be '), false
         }
     }
     alea(min, max, round=16){
@@ -127,12 +127,10 @@ module.exports = class library{
                     return 'error'
                 }
             } else {
-                console.warn(`the var min : ${max} is not a number`)
-                return 'error'
+                return console.warn(`the var min : ${max} is not a number`), false
             }
         } else {
-            console.warn(`the var min : ${min} is not a number`)
-            return 'error'
+            return console.warn(`the var min : ${min} is not a number`), false
         }
     }
     convertSetInArray(set, attr=false){
@@ -151,7 +149,7 @@ module.exports = class library{
             }
             return arr
         } else {
-            console.error(`${set} must be a Set Object`)
+            return console.error(`${set} must be a Set Object`), false
         }
     }
     bufferToReadStream(buffer){
@@ -161,12 +159,12 @@ module.exports = class library{
         stream.push(null);
         return stream;
     }
-    objLength = function(arr){
+    objLength(arr){
         if(Array.isArray(arr) === false && typeof(arr) == 'object'){
             return Object.keys(arr).length;
         }
         else{
-            return console.warn("the input of this function is not an object, please check the datatype of it"), undefined
+            return console.warn("the input of this function is not an object, please check the datatype of it"), false
         }
     }
 }
