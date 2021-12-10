@@ -169,4 +169,24 @@ module.exports = class library{
             return console.warn("the input of this function is not an object, please check the datatype of it"), undefined
         }
     }
+    realPath(realPath){
+        realPath = realPath.replace(/\\/g,'/').split('/')
+    
+        let count = 0;
+        for(let i = realPath.length-1; i >= 0; i--){
+            if(realPath[i] == ".."){
+                count++
+            }
+            if(count > 0 && realPath[i-1] != '..'){
+                count = 0;
+                realPath.splice(i,1)
+                realPath.splice(i-1,1)
+            } 
+        }
+        realPath = realPath.join('/').trim()
+        if(realPath.charAt(realPath.length-1) == '/'){
+            realPath = realPath
+        }
+        return realPath
+    }
 }
